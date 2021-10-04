@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'JenkinsAngularProject';
+  text: string;
+
+  constructor(private apiService: ApiService) {
+    //this.loadServerAppSettings();
+  }
+
+  loadServerAppSettings(): void {
+    this.apiService.getServerAppSettings().subscribe(data => {
+      this.text = data;
+    });
+  }
+
 }
